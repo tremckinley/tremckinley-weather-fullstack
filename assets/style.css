@@ -1,0 +1,8 @@
+#current-container {
+    border: 1px solid black;
+    
+}
+
+.weather-stats > p {
+    margin-bottom: 0px;
+}
