@@ -52,17 +52,17 @@ async function populateWeather(city) {
         forecastBox.setAttribute("class", "forecast-box")
         forecastBox.setAttribute("id", `day ${i + 1}`);
         fiveDayIconEl = document.createElement("img")
-        fiveDayIconEl.setAttribute("class", "five-day-icon")
+        fiveDayIconEl.setAttribute("class", "reading")
         fiveDayIconEl.src = `https://openweathermap.org/img/wn/${fiveDaysAtNoon[i].weather[0].icon}@2x.png`
         fiveDayTempEl = document.createElement("p")
-        fiveDayTempEl.setAttribute("class", "five-day-temp")
-        fiveDayTempEl.textContent = fiveDaysAtNoon[i].main.temp;
+        fiveDayTempEl.setAttribute("class", "reading")
+        fiveDayTempEl.innerHTML = `<i class="bi bi-thermometer-half me-2"></i> ${fiveDaysAtNoon[i].main.temp}`;
         fiveDayWindEl = document.createElement("p")
-        fiveDayWindEl.setAttribute("class", "five-day-wind")
-        fiveDayWindEl.textContent = fiveDaysAtNoon[i].wind.speed;
+        fiveDayWindEl.setAttribute("class", "reading")
+        fiveDayWindEl.innerHTML =  `<i class="bi bi-wind me-2"></i> ${fiveDaysAtNoon[i].wind.speed}`
         fiveDayHumidityEl = document.createElement("p")
-        fiveDayHumidityEl.setAttribute("class", "five-day-humidity")
-        fiveDayHumidityEl.textContent = fiveDaysAtNoon[i].main.humidity;
+        fiveDayHumidityEl.setAttribute("class", "reading")
+        fiveDayHumidityEl.innerHTML = `<i class="bi bi-moisture me-2"></i> ${fiveDaysAtNoon[i].main.humidity}`;
 
         
         fiveDayContainer.appendChild(forecastBox);

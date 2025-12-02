@@ -6,3 +6,7 @@
 .weather-stats > p {
     margin-bottom: 0px;
 }
+
+.reading {
+    margin: 0px; 
+}
