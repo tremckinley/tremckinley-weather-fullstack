@@ -49,27 +49,31 @@ async function populateWeather(city) {
 
     for (let i = 0; i < fiveDaysAtNoon.length; i++) {
         forecastBox = document.createElement("div");
-        forecastBox.setAttribute("class", "forecast-box")
+        forecastBox.style.width = "10em"
+        forecastBox.setAttribute("class", "card m-4 shadow")
         forecastBox.setAttribute("id", `day ${i + 1}`);
         fiveDayIconEl = document.createElement("img")
-        fiveDayIconEl.setAttribute("class", "reading")
+        fiveDayIconEl.setAttribute("class", "reading card-img-top")
         fiveDayIconEl.src = `https://openweathermap.org/img/wn/${fiveDaysAtNoon[i].weather[0].icon}@2x.png`
-        fiveDayTempEl = document.createElement("p")
-        fiveDayTempEl.setAttribute("class", "reading")
+        cardList = document.createElement("ul");
+        cardList.setAttribute("class", "list-group list-group-flush")
+        fiveDayTempEl = document.createElement("li")
+        fiveDayTempEl.setAttribute("class", "list-group-item")
         fiveDayTempEl.innerHTML = `<i class="bi bi-thermometer-half me-2"></i> ${fiveDaysAtNoon[i].main.temp}`;
-        fiveDayWindEl = document.createElement("p")
-        fiveDayWindEl.setAttribute("class", "reading")
+        fiveDayWindEl = document.createElement("li")
+        fiveDayWindEl.setAttribute("class", "list-group-item")
         fiveDayWindEl.innerHTML =  `<i class="bi bi-wind me-2"></i> ${fiveDaysAtNoon[i].wind.speed}`
-        fiveDayHumidityEl = document.createElement("p")
-        fiveDayHumidityEl.setAttribute("class", "reading")
+        fiveDayHumidityEl = document.createElement("li")
+        fiveDayHumidityEl.setAttribute("class", "list-group-item")
         fiveDayHumidityEl.innerHTML = `<i class="bi bi-moisture me-2"></i> ${fiveDaysAtNoon[i].main.humidity}`;
 
         
         fiveDayContainer.appendChild(forecastBox);
-        forecastBox.appendChild(fiveDayIconEl);
-        forecastBox.appendChild(fiveDayTempEl);
-        forecastBox.appendChild(fiveDayWindEl);
-        forecastBox.appendChild(fiveDayHumidityEl);
+        forecastBox.appendChild(cardList);
+        cardList.appendChild(fiveDayIconEl);
+        cardList.appendChild(fiveDayTempEl);
+        cardList.appendChild(fiveDayWindEl);
+        cardList.appendChild(fiveDayHumidityEl);
     }
 
 }

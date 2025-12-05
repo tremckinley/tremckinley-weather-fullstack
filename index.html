@@ -10,17 +10,13 @@
 </head>
 <body>
     <h1><i>Upcoming Weather</i></h1>
-    <div id="city-selector">
+    <div id="city-selector" class="mb-2 d-flex justify-content-center gap-1">
         <label for="city-input">Select a city</label>
         <input id="city-input" name="city-input" placeholder="Enter city name" type="text" value="Green Bay" required>
         <button id="city-button">Get Weather</button>
     </div>
-    <section id="history-container">
-        <p>Dallas</p>
-        <p>New York</p>
-    </section>
     <main>
-        <section id="current-container" class="d-flex justify-content-center align-items-center">
+        <section id="current-container" class="d-flex justify-content-center align-items-center border border-subtle shadow">
             <img id="current-card-img"  src="https://openweathermap.org/img/wn/04d@2x.png" alt="weather-icon"/>
             <div class="weather-stats d-flex flex-column h-25 justify-content-center">
             <div class="d-flex gap-2">
@@ -36,7 +32,19 @@
                 <p id="current-humidity" class="reading"></p>   
             </div>
         </section>
-        <section id="5-day-container" class="d-flex flex-wrap justify-content-around"></section>
+        <section id="5-day-container" class="d-flex flex-wrap justify-content-around">
+            <!-- <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-footer">
+                </div>
+            </div> -->
+</div>
+        </section>
     </main>
 
 
