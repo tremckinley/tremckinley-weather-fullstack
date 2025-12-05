@@ -1,14 +1,15 @@
 //Weather App open API project
-const currentEl = document.getElementById('current-container')
+const currentEl = document.getElementById('current-container');
 const APIKey = "76adfc47f2fe188af09c3379c519daee"
-const cityInput = document.getElementById('city-input')
-const submitButton = document.getElementById('city-button')
-const fiveDayContainer = document.getElementById('5-day-container')
+const cityInput = document.getElementById('city-input');
+const submitButton = document.getElementById('city-button');
+const fiveDayContainer = document.getElementById('5-day-container');
+const historyList = document.getElementById('history-list');
 
 async function getTestData() {
     const testData = await fetch("./test-data.json");
     return testData;
-}
+};
 
 async function getCityLatLong(city) {
     const cityInput = city.trim().toLowerCase()
@@ -16,7 +17,35 @@ async function getCityLatLong(city) {
     const data = await response.json()
     console.log(data)
     return data
-    
+};
+
+function getHistory() {
+    const storedData = localStorage.getItem('city-list') ? localStorage.getItem('city-list').split(',') : [];
+    historyList.innerHTML = '';
+    for (let j = 0; j < storedData.length; j ++) {
+        historyItemEl = document.createElement('li');
+        historyItemEl.setAttribute('class', "dropdown-item");
+        historyItemEl.textContent = storedData[j].toUpperCase();
+        historyItemEl.addEventListener('click', () => populateWeatherFromHistory(storedData[j]));
+        historyList.appendChild(historyItemEl);
+    }
+    return storedData;
+};
+
+function addToHistory(city) {
+    let history = getHistory();
+    // account for re-searching, remove an item to add it to the top
+    history = history.filter(item => item !== city);
+    // unshift search to the list
+    history.unshift(city);
+    // make the max 5
+    if (history.length > 5) {
+        history.pop(); // pop off oldest
+    }
+
+    localStorage.setItem('city-list', history);
+
+
 }
 
 async function getWeather(city) {
@@ -46,15 +75,18 @@ async function populateWeather(city) {
     currentTempEl.textContent = currentWeather.temp;
     currentHumidityEl.textContent = currentWeather.humidity;
     currentWindEl.textContent = weatherData.list[0].wind.speed;
+    fiveDayContainer.innerHTML = ""
 
     for (let i = 0; i < fiveDaysAtNoon.length; i++) {
+        
         forecastBox = document.createElement("div");
         forecastBox.style.width = "10em"
         forecastBox.setAttribute("class", "card m-4 shadow")
         forecastBox.setAttribute("id", `day ${i + 1}`);
         fiveDayIconEl = document.createElement("img")
         fiveDayIconEl.setAttribute("class", "reading card-img-top")
-        fiveDayIconEl.src = `https://openweathermap.org/img/wn/${fiveDaysAtNoon[i].weather[0].icon}@2x.png`
+        let dayIcon = fiveDaysAtNoon[i].weather[0].icon.replace("n", "d");
+        fiveDayIconEl.src = `https://openweathermap.org/img/wn/${dayIcon}@2x.png`
         cardList = document.createElement("ul");
         cardList.setAttribute("class", "list-group list-group-flush")
         fiveDayTempEl = document.createElement("li")
@@ -76,9 +108,20 @@ async function populateWeather(city) {
         cardList.appendChild(fiveDayHumidityEl);
     }
 
+    addToHistory(city);
+
 }
 
-submitButton.addEventListener('click',  populateWeather(cityInput.value))
+function populateWeatherFromHistory(city) {
+    cityInput.value = city;
+    populateWeather(city);
+};
+
+submitButton.addEventListener('click', () => populateWeather(cityInput.value))
+
+let currentHistory = getHistory();
+populateWeatherFromHistory(currentHistory[0]);
+
 
 //getCityLatLong("Memphis  ");
 
