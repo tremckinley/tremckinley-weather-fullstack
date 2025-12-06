@@ -5,6 +5,7 @@ const cityInput = document.getElementById('city-input');
 const submitButton = document.getElementById('city-button');
 const fiveDayContainer = document.getElementById('5-day-container');
 const historyList = document.getElementById('history-list');
+const cityHeader = document.getElementById('city-header');
 
 async function getTestData() {
     const testData = await fetch("./test-data.json");
@@ -71,6 +72,7 @@ async function populateWeather(city) {
         fiveDaysAtNoon.shift();
     };
 
+    cityHeader.textContent = `${weatherData.city.name} - ${weatherData.list[0].dt_txt.toLocaleString()}`
     weatherIconEl.src = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
     currentTempEl.textContent = currentWeather.temp;
     currentHumidityEl.textContent = currentWeather.humidity;
@@ -83,10 +85,16 @@ async function populateWeather(city) {
         forecastBox.style.width = "10em"
         forecastBox.setAttribute("class", "card m-4 shadow")
         forecastBox.setAttribute("id", `day ${i + 1}`);
+        forecastBoxHeader = document.createElement("div")
+        forecastBoxHeader.setAttribute("class", "card-header header")
+        let nextDate = fiveDaysAtNoon[i].dt_txt.split(" ")[0];
+        forecastBoxHeader.textContent = nextDate
         fiveDayIconEl = document.createElement("img")
         fiveDayIconEl.setAttribute("class", "reading card-img-top")
         let dayIcon = fiveDaysAtNoon[i].weather[0].icon.replace("n", "d");
         fiveDayIconEl.src = `https://openweathermap.org/img/wn/${dayIcon}@2x.png`
+        forecastBox.style.backgroundImage = `url(https://openweathermap.org/img/wn/${dayIcon}@2x.png)`
+        forecastBox.style.backgroundSize = "cover"
         cardList = document.createElement("ul");
         cardList.setAttribute("class", "list-group list-group-flush")
         fiveDayTempEl = document.createElement("li")
@@ -101,8 +109,9 @@ async function populateWeather(city) {
 
         
         fiveDayContainer.appendChild(forecastBox);
+        forecastBox.appendChild(forecastBoxHeader);
         forecastBox.appendChild(cardList);
-        cardList.appendChild(fiveDayIconEl);
+       // cardList.appendChild(fiveDayIconEl);
         cardList.appendChild(fiveDayTempEl);
         cardList.appendChild(fiveDayWindEl);
         cardList.appendChild(fiveDayHumidityEl);
@@ -120,7 +129,7 @@ function populateWeatherFromHistory(city) {
 submitButton.addEventListener('click', () => populateWeather(cityInput.value))
 
 let currentHistory = getHistory();
-populateWeatherFromHistory(currentHistory[0]);
+populateWeatherFromHistory(currentHistory[0] || "");
 
 
 //getCityLatLong("Memphis  ");

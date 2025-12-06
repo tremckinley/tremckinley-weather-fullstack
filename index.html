@@ -9,7 +9,9 @@
     <title>tremckinley's weather app</title>
 </head>
 <body>
+    <div class="p-4">
     <h1><i>Upcoming Weather</i></h1>
+    <div><i><h3 id="city-header"></h3></i></div>
     <div id="city-selector" class="mb-2 d-flex justify-content-center gap-1">
         <label for="city-input"><strong>Select a city</strong></label>
         <input id="city-input" name="city-input" placeholder="Enter city name" type="text" required>
@@ -22,8 +24,10 @@
         </ul></button>
     </div>
     </div>
+    </div>
+    <div class="d-flex justify-content-center"><h3 id="city-date-time"></h3></div>
     <main>
-        <section id="current-container" class="d-flex  justify-content-center align-items-center border border-subtle shadow" style="height: 10rem;">
+        <section id="current-container" class="d-flex justify-content-center align-items-center shadow" style="height: 10rem;">
             <img id="current-card-img"  src="https://openweathermap.org/img/wn/04d@2x.png" alt="weather-icon" style="height: 10rem;"/>
             <div class="weather-stats d-flex flex-column h-25 justify-content-center">
             <div class="d-flex gap-2">

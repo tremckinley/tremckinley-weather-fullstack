@@ -1,5 +1,5 @@
 body {
-    background: rgba(0, 128, 128, 0.466);
+    background: white;
 }
 
 p {
@@ -7,6 +7,22 @@ p {
     font-size: large;
 }
 
+
+
 .card {
-    background: teal;
+    background: rgba(89, 110, 110, 0.3);
+}
+
+.header {
+    font-weight: bold;
+    color: whitesmoke;
+    text-align: center;
+    border: none;
+}
+
+.list-group-item {
+    background-color: rgba(245, 245, 245, 0.7);
+    font-weight: bolder;
+    font-size: 1.3rem;
+
 }
