@@ -1,4 +1,0 @@
-I need to...
-
-Create a bootstrap card that has the image header and 3 readings
-
