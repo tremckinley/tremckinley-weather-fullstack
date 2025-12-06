@@ -14,7 +14,7 @@ async function getTestData() {
 
 async function getCityLatLong(city) {
     const cityInput = city.trim().toLowerCase()
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityInput}&appid=${APIKey}`)
+    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityInput}&appid=${APIKey}`)
     const data = await response.json()
     console.log(data)
     return data
