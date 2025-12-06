@@ -51,7 +51,7 @@ function addToHistory(city) {
 
 async function getWeather(city) {
     const cityInfo = await getCityLatLong(city);
-    const weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${cityInfo[0].lat}&lon=${cityInfo[0].lon}&appid=${APIKey}&units=imperial`);
+    const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityInfo[0].lat}&lon=${cityInfo[0].lon}&appid=${APIKey}&units=imperial`);
     const weatherData = await weatherResponse.json();
     console.log(weatherData);
     return weatherData;
